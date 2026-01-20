@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VaultShare | Premium Savings</title>
+    <link rel="stylesheet" href="vaultshare.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="login-view" class="view-container">
+        <div class="brand-header-center">
+            <h1 onclick="countAdminTaps()">VaultShare</h1>
+            <p class="subtitle">Secure Premium Vault</p>
+        </div>
+        
+        <div class="card login-card">
+            <div class="input-group">
+                <label>Mobile Number</label>
+                <input type="tel" id="login-phone" class="site-input" placeholder="080...">
+                
+                <label>Password</label>
+                <input type="password" id="login-password" class="site-input" maxlength="15" placeholder="Enter password">
+            </div>
+
+            <button onclick="handleLogin()" class="primary-btn">Access Vault</button>
+            
+            <p class="footer-prompt">
+                Don't have an account? <span class="gold-link" onclick="showView('signup-view')">Sign up!</span>
+            </p>
+        </div>
+    </div>
+
+    <div id="signup-view" class="view-container hidden">
+        <div class="brand-header-center">
+            <h2>Join VaultShare</h2>
+            <p class="subtitle">Create Your Portfolio</p>
+        </div>
+
+        <div class="card scroll-card">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="reg-name" class="site-input" placeholder="e.g. Ebenezer...">
+                
+                <label>Mobile Number (Account ID)</label>
+                <input type="tel" id="reg-phone" class="site-input" placeholder="080...">
+                
+                <label>Gender</label>
+                <select id="reg-gender" class="site-input">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <label>Date of Birth</label>
+                <input type="date" id="reg-dob" class="site-input">
+
+                <label>Email Address</label>
+                <input type="email" id="reg-email" class="site-input" placeholder="mail@example.com">
+
+                <label>Home Address</label>
+                <input type="text" id="reg-address" class="site-input" placeholder="Street, City...">
+
+                <hr class="gold-divider">
+
+                <label>Create Login Password (max 15 chars)</label>
+                <input type="password" id="reg-password" class="site-input" maxlength="15">
+                
+                <label>Confirm Login Password</label>
+                <input type="password" id="reg-password-confirm" class="site-input" maxlength="15">
+
+                <label>Create Withdrawal PIN (4 digits)</label>
+                <input type="password" id="reg-pin" class="site-input" maxlength="4" inputmode="numeric" style="letter-spacing: 5px; text-align: center;">
+                
+                <label>Confirm Withdrawal PIN</label>
+                <input type="password" id="reg-pin-confirm" class="site-input" maxlength="4" inputmode="numeric" style="letter-spacing: 5px; text-align: center;">
+            </div>
+            
+            <button onclick="handleSignUp()" class="primary-btn">Initialize Vault</button>
+            <p class="footer-prompt">
+                Already have an account? <span class="gold-link" onclick="showView('login-view')">Log in!</span>
+            </p>
+        </div>
+    </div>
+
+    <div id="home-view" class="view-container hidden with-nav home-layout">
+        <div class="top-app-bar">
+            <div class="user-profile-header">
+                <div class="profile-circle" id="header-avatar">U</div>
+                <div class="header-text-col">
+                    <span class="greeting-text">Hello, <span id="header-firstname">User</span></span>
+                    <span id="header-tier-badge" class="tier-badge-small">Tier 1</span>
+                </div>
+            </div>
+            <div class="app-actions">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="premium-balance-card">
+            <div class="balance-header">
+                <div class="balance-label-group">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <span class="label">Available Balance</span>
+                    
+                    <span id="balance-toggle" class="eye-icon" onclick="toggleBalanceVisibility()">
+                        <svg id="eye-open-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg id="eye-closed-svg" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+            
+            <h1 id="display-balance">₦0.00</h1>
+
+            <div id="maturity-notice" class="hidden">
+                <small class="maturity-text">⚠️ ₦<span id="pending-interest-amt">0</span> maturing for interest in 48h</small>
+            </div>
+        </div>
+
+        <div class="quick-actions-grid">
+            <div class="action-item" onclick="showView('deposit-view')">
+                <div class="icon-circle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"></path>
+                    </svg>
+                </div>
+                <span>Add Money</span>
+            </div>
+            <div class="action-item" onclick="showView('withdraw-view')">
+                <div class="icon-circle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                        <path d="M5 12h14"></path>
+                    </svg>
+                </div>
+                <span>Withdraw</span>
+            </div>
+            <div class="action-item" onclick="switchTab('calc', document.getElementById('nav-calc'))">
+                <div class="icon-circle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                        <line x1="8" y1="21" x2="16" y2="21"></line>
+                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    </svg>
+                </div>
+                <span>Calculator</span>
+            </div>
+        </div>
+
+        <div class="transactions-section">
+            <h3 class="section-title">Transaction History</h3>
+            <div id="dashboard-history-feed" class="history-scroll-area">
+                </div>
+        </div>
+    </div>
+
+    <div id="transaction-detail-view" class="view-container hidden">
+        <button onclick="showDashboard()" class="back-btn">← Back</button>
+        <div class="card detail-card">
+            <div class="detail-header">
+                <div class="detail-icon-large" id="detail-icon"></div>
+                <h2 id="detail-amount">₦0.00</h2>
+                <span id="detail-status" class="status-pill">Success</span>
+            </div>
+            <div class="detail-row">
+                <span>Transaction Type</span>
+                <span id="detail-type" class="val">Deposit</span>
+            </div>
+            <div class="detail-row">
+                <span>Date</span>
+                <span id="detail-date" class="val">--</span>
+            </div>
+            <div class="detail-row">
+                <span>Reference ID</span>
+                <span id="detail-ref" class="val">--</span>
+            </div>
+            <div class="detail-row" id="detail-note-row">
+                <span>Note</span>
+                <span id="detail-note" class="val">--</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="calc-view" class="view-container hidden with-nav">
+        <div class="page-header">
+            <h3>Growth Projector</h3>
+        </div>
+        <div class="card calculator-card">
+            <p class="subtitle">Estimate earnings at 3.5% p.a.</p>
+            <div class="input-group">
+                <label>Deposit Amount (₦)</label>
+                <input type="number" id="calc-amount" class="site-input" placeholder="50000" oninput="projectInterest()">
+            </div>
+            <div class="projection-grid">
+                <div class="projection-box">
+                    <span class="label">Monthly Gain</span>
+                    <span class="value" id="monthly-gain">₦0.00</span>
+                </div>
+                <div class="projection-box">
+                    <span class="label">Yearly Gain</span>
+                    <span class="value" id="yearly-gain">₦0.00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="me-view" class="view-container hidden with-nav">
+        <div class="me-header">
+            <div class="user-info-row">
+                <div class="profile-avatar" id="me-avatar">U</div>
+                <div class="user-text">
+                    <h2 id="me-username">Hi, User</h2>
+                    <span id="me-tier-badge" class="tier-badge">Tier 1 Saver</span>
+                </div>
+            </div>
+            
+            <div class="total-balance-box">
+                <p class="label">Total Balance</p>
+                <h2 id="me-total-balance">₦0.00</h2>
+                <p class="interest-today">Interest Credited Today: <span id="me-daily-gain">+₦0.00</span></p>
+            </div>
+        </div>
+
+        <div class="me-menu-list">
+            <div class="me-menu-item" onclick="switchTab('home', document.getElementById('nav-home'))">
+                <div class="menu-left">
+                    <svg class="menu-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <span>Transaction History</span>
+                </div>
+                <span class="chevron">›</span>
+            </div>
+            <div class="me-menu-item" onclick="showView('bank-info-view')">
+                <div class="menu-left">
+                    <svg class="menu-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l8-4 8 4v14M6 10h12"/></svg>
+                    <span>Withdrawal Bank Accounts</span>
+                </div>
+                <span class="chevron">›</span>
+            </div>
+            <div class="me-menu-item" onclick="showView('profile-details-view')">
+                <div class="menu-left">
+                    <svg class="menu-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span>My Profile</span>
+                </div>
+                <span class="chevron">›</span>
+            </div>
+            <a href="https://wa.me/2348056612214" target="_blank" class="me-menu-item">
+                <div class="menu-left">
+                    <svg class="menu-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                    <span>Customer Service</span>
+                </div>
+                <span class="chevron">›</span>
+            </a>
+        </div>
+        <button onclick="handleLogout()" class="logout-btn">Log Out</button>
+    </div>
+
+    <div id="deposit-view" class="view-container hidden">
+        <button onclick="showDashboard()" class="back-btn">← Back</button>
+        <div class="card">
+            <h3>Add Money</h3>
+            <p class="subtitle">Send funds, then upload receipt.</p>
+            <div class="input-group">
+                <label>Amount Sent (₦)</label>
+                <input type="number" id="deposit-amount-input" class="site-input" placeholder="0.00">
+                <label>Upload Proof (Screenshot)</label>
+                <div class="receipt-upload-box" onclick="document.getElementById('receipt-file').click()">
+                    <span id="receipt-status">Tap to upload receipt 📷</span>
+                    <input type="file" id="receipt-file" accept="image/*" style="display: none;" onchange="previewReceipt(event)">
+                </div>
+            </div>
+            <button onclick="requestDeposit()" class="primary-btn">Submit for Approval</button>
+        </div>
+    </div>
+
+    <div id="withdraw-view" class="view-container hidden">
+        <button onclick="showDashboard()" class="back-btn">← Back</button>
+        <div class="card">
+            <h3>Withdrawal</h3>
+            <div class="input-group">
+                <label>Amount (₦)</label>
+                <input type="number" id="withdraw-amount" class="site-input" placeholder="0.00">
+                <label>Security PIN</label>
+                <input type="password" id="withdraw-pin" class="site-input" maxlength="4" placeholder="****" inputmode="numeric">
+            </div>
+            <button onclick="handleWithdrawal()" class="confirm-withdraw-btn">Confirm Withdrawal</button>
+        </div>
+    </div>
+
+    <div id="profile-details-view" class="view-container hidden">
+        <button onclick="showView('me-view')" class="back-btn">‹ My Profile</button>
+        <div class="profile-card-main">
+            <div class="avatar-container">
+                <div class="profile-image-wrapper" onclick="document.getElementById('image-upload').click()">
+                    <div id="prof-img-display" class="profile-avatar large">P</div>
+                    <div class="camera-overlay">📷</div>
+                </div>
+                <input type="file" id="image-upload" accept="image/*" style="display: none;" onchange="handleImageUpdate(event)">
+                <p id="prof-nickname" class="nickname-label">pbudd</p>
+            </div>
+            <div class="info-group-box">
+                <div class="info-row"><span class="label">Full Name</span><span class="value" id="prof-fullname">---</span></div>
+                <div class="info-row"><span class="label">Mobile</span><span class="value" id="prof-phone">---</span></div>
+                <div class="info-row"><span class="label">Gender</span><span class="value" id="prof-gender">---</span></div>
+                <div class="info-row"><span class="label">DOB</span><span class="value" id="prof-dob">---</span></div>
+                <div class="info-row"><span class="label">Email</span><span class="value" id="prof-email">---</span></div>
+                <div class="info-row"><span class="label">Address</span><span class="value" id="prof-address">---</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bank-info-view" class="view-container hidden">
+        <button onclick="showView('me-view')" class="back-btn">← Back</button>
+        <div class="card">
+            <h3>Saved Bank Accounts</h3>
+            <div class="bank-entry-card">
+                <h4>Account 1</h4>
+                <input type="text" id="bank1-name" class="site-input" placeholder="Bank Name">
+                <input type="text" id="acc1-name" class="site-input" placeholder="Account Name">
+                <input type="number" id="acc1-num" class="site-input" placeholder="Account Number">
+            </div>
+            <div class="bank-entry-card">
+                <h4>Account 2</h4>
+                <input type="text" id="bank2-name" class="site-input" placeholder="Bank Name">
+                <input type="text" id="acc2-name" class="site-input" placeholder="Account Name">
+                <input type="number" id="acc2-num" class="site-input" placeholder="Account Number">
+            </div>
+            <button onclick="saveBankDetails()" class="primary-btn">Save Details</button>
+        </div>
+    </div>
+
+    <div id="admin-view" class="view-container hidden admin-theme">
+        <div class="header-row">
+            <h3>Admin Master Vault</h3>
+            <button onclick="showDashboard()" class="back-btn">Exit</button>
+        </div>
+        <div class="admin-stats">
+            <span class="label">Total Vault Liability</span>
+            <h2 id="vault-total">₦0.00</h2>
+        </div>
+        <h4>Pending Deposits</h4>
+        <div id="pending-requests-list"></div>
+    </div>
+
+    <nav class="bottom-nav hidden" id="main-nav">
+        <div class="nav-tab active" id="nav-home" onclick="switchTab('home', this)">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span class="nav-label">Home</span>
+        </div>
+        <div class="nav-tab" id="nav-calc" onclick="switchTab('calc', this)">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span class="nav-label">Calculator</span>
+        </div>
+        <div class="nav-tab" id="nav-me" onclick="switchTab('me', this)">
+            <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span class="nav-label">Me</span>
+        </div>
+    </nav>
+
+    <script src="vaultshare.js"></script>
+</body>
+</html>
