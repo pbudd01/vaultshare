@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VaultShare | Premium Savings</title>
+    <title>VaultShare | Premium</title>
     <link rel="stylesheet" href="vaultshare.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 </head>
@@ -27,7 +27,7 @@
             <button onclick="handleLogin()" class="primary-btn">Access Vault</button>
             
             <p class="footer-prompt">
-                Don't have an account? <span class="gold-link" onclick="showView('signup-view')">Sign up!</span>
+                Don't have an account? <span class="accent-link" onclick="showView('signup-view')">Sign up!</span>
             </p>
         </div>
     </div>
@@ -61,9 +61,9 @@
                 <label>Home Address</label>
                 <input type="text" id="reg-address" class="site-input" placeholder="Street, City...">
 
-                <hr class="gold-divider">
+                <hr class="accent-divider">
 
-                <label>Create Login Password (max 15 chars)</label>
+                <label>Create Login Password</label>
                 <input type="password" id="reg-password" class="site-input" maxlength="15">
                 
                 <label>Confirm Login Password</label>
@@ -78,7 +78,7 @@
             
             <button onclick="handleSignUp()" class="primary-btn">Initialize Vault</button>
             <p class="footer-prompt">
-                Already have an account? <span class="gold-link" onclick="showView('login-view')">Log in!</span>
+                Already have an account? <span class="accent-link" onclick="showView('login-view')">Log in!</span>
             </p>
         </div>
     </div>
@@ -131,7 +131,7 @@
         <div class="quick-actions-grid">
             <div class="action-item" onclick="showView('deposit-view')">
                 <div class="icon-circle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
                         <path d="M12 5v14M5 12h14"></path>
                     </svg>
                 </div>
@@ -139,7 +139,7 @@
             </div>
             <div class="action-item" onclick="showView('withdraw-view')">
                 <div class="icon-circle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
                         <path d="M5 12h14"></path>
                     </svg>
                 </div>
@@ -147,10 +147,15 @@
             </div>
             <div class="action-item" onclick="switchTab('calc', document.getElementById('nav-calc'))">
                 <div class="icon-circle">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="2">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                        <line x1="12" y1="17" x2="12" y2="21"></line>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
+                        <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                        <line x1="8" y1="6" x2="16" y2="6"></line>
+                        <line x1="16" y1="14" x2="16" y2="18"></line>
+                        <path d="M16 10h.01"></path>
+                        <path d="M12 10h.01"></path>
+                        <path d="M8 10h.01"></path>
+                        <path d="M12 14h.01"></path>
+                        <path d="M8 14h.01"></path>
                     </svg>
                 </div>
                 <span>Calculator</span>
@@ -159,8 +164,7 @@
 
         <div class="transactions-section">
             <h3 class="section-title">Transaction History</h3>
-            <div id="dashboard-history-feed" class="history-scroll-area">
-                </div>
+            <div id="dashboard-history-feed" class="history-scroll-area"></div>
         </div>
     </div>
 
@@ -170,47 +174,12 @@
             <div class="detail-header">
                 <div class="detail-icon-large" id="detail-icon"></div>
                 <h2 id="detail-amount">₦0.00</h2>
-                <span id="detail-status" class="status-pill">Success</span>
+                <span id="detail-status" class="status-pill">Pending</span>
             </div>
-            <div class="detail-row">
-                <span>Transaction Type</span>
-                <span id="detail-type" class="val">Deposit</span>
-            </div>
-            <div class="detail-row">
-                <span>Date</span>
-                <span id="detail-date" class="val">--</span>
-            </div>
-            <div class="detail-row">
-                <span>Reference ID</span>
-                <span id="detail-ref" class="val">--</span>
-            </div>
-            <div class="detail-row" id="detail-note-row">
-                <span>Note</span>
-                <span id="detail-note" class="val">--</span>
-            </div>
-        </div>
-    </div>
-
-    <div id="calc-view" class="view-container hidden with-nav">
-        <div class="page-header">
-            <h3>Growth Projector</h3>
-        </div>
-        <div class="card calculator-card">
-            <p class="subtitle">Estimate earnings at 3.5% p.a.</p>
-            <div class="input-group">
-                <label>Deposit Amount (₦)</label>
-                <input type="number" id="calc-amount" class="site-input" placeholder="50000" oninput="projectInterest()">
-            </div>
-            <div class="projection-grid">
-                <div class="projection-box">
-                    <span class="label">Monthly Gain</span>
-                    <span class="value" id="monthly-gain">₦0.00</span>
-                </div>
-                <div class="projection-box">
-                    <span class="label">Yearly Gain</span>
-                    <span class="value" id="yearly-gain">₦0.00</span>
-                </div>
-            </div>
+            <div class="detail-row"><span>Type</span><span id="detail-type" class="val">--</span></div>
+            <div class="detail-row"><span>Date</span><span id="detail-date" class="val">--</span></div>
+            <div class="detail-row"><span>Ref ID</span><span id="detail-ref" class="val">--</span></div>
+            <div class="detail-row" id="detail-note-row"><span>Note</span><span id="detail-note" class="val">--</span></div>
         </div>
     </div>
 
@@ -223,7 +192,6 @@
                     <span id="me-tier-badge" class="tier-badge">Tier 1 Saver</span>
                 </div>
             </div>
-            
             <div class="total-balance-box">
                 <p class="label">Total Balance</p>
                 <h2 id="me-total-balance">₦0.00</h2>
@@ -264,38 +232,6 @@
         <button onclick="handleLogout()" class="logout-btn">Log Out</button>
     </div>
 
-    <div id="deposit-view" class="view-container hidden">
-        <button onclick="showDashboard()" class="back-btn">← Back</button>
-        <div class="card">
-            <h3>Add Money</h3>
-            <p class="subtitle">Send funds, then upload receipt.</p>
-            <div class="input-group">
-                <label>Amount Sent (₦)</label>
-                <input type="number" id="deposit-amount-input" class="site-input" placeholder="0.00">
-                <label>Upload Proof (Screenshot)</label>
-                <div class="receipt-upload-box" onclick="document.getElementById('receipt-file').click()">
-                    <span id="receipt-status">Tap to upload receipt 📷</span>
-                    <input type="file" id="receipt-file" accept="image/*" style="display: none;" onchange="previewReceipt(event)">
-                </div>
-            </div>
-            <button onclick="requestDeposit()" class="primary-btn">Submit for Approval</button>
-        </div>
-    </div>
-
-    <div id="withdraw-view" class="view-container hidden">
-        <button onclick="showDashboard()" class="back-btn">← Back</button>
-        <div class="card">
-            <h3>Withdrawal</h3>
-            <div class="input-group">
-                <label>Amount (₦)</label>
-                <input type="number" id="withdraw-amount" class="site-input" placeholder="0.00">
-                <label>Security PIN</label>
-                <input type="password" id="withdraw-pin" class="site-input" maxlength="4" placeholder="****" inputmode="numeric">
-            </div>
-            <button onclick="handleWithdrawal()" class="confirm-withdraw-btn">Confirm Withdrawal</button>
-        </div>
-    </div>
-
     <div id="profile-details-view" class="view-container hidden">
         <button onclick="showView('me-view')" class="back-btn">‹ My Profile</button>
         <div class="profile-card-main">
@@ -318,10 +254,25 @@
         </div>
     </div>
 
+    <div id="calc-view" class="view-container hidden with-nav">
+        <div class="page-header"><h3>Growth Projector</h3></div>
+        <div class="card calculator-card">
+            <p class="subtitle">Estimate earnings at 3.5% p.a.</p>
+            <div class="input-group">
+                <label>Deposit Amount (₦)</label>
+                <input type="number" id="calc-amount" class="site-input" placeholder="50000" oninput="projectInterest()">
+            </div>
+            <div class="projection-grid">
+                <div class="projection-box"><span class="label">Monthly</span><span class="value" id="monthly-gain">₦0.00</span></div>
+                <div class="projection-box"><span class="label">Yearly</span><span class="value" id="yearly-gain">₦0.00</span></div>
+            </div>
+        </div>
+    </div>
+
     <div id="bank-info-view" class="view-container hidden">
         <button onclick="showView('me-view')" class="back-btn">← Back</button>
         <div class="card">
-            <h3>Saved Bank Accounts</h3>
+            <h3>Saved Accounts</h3>
             <div class="bank-entry-card">
                 <h4>Account 1</h4>
                 <input type="text" id="bank1-name" class="site-input" placeholder="Bank Name">
@@ -338,17 +289,48 @@
         </div>
     </div>
 
+    <div id="deposit-view" class="view-container hidden">
+        <button onclick="showDashboard()" class="back-btn">← Back</button>
+        <div class="card">
+            <h3>Add Money</h3>
+            <p class="subtitle">Send funds, then upload receipt.</p>
+            <div class="input-group">
+                <label>Amount Sent (₦)</label>
+                <input type="number" id="deposit-amount-input" class="site-input" placeholder="0.00">
+                <label>Upload Proof (Screenshot)</label>
+                <div class="receipt-upload-box" onclick="document.getElementById('receipt-file').click()">
+                    <span id="receipt-status">Tap to upload receipt 📷</span>
+                    <input type="file" id="receipt-file" accept="image/*" style="display: none;" onchange="previewReceipt(event)">
+                </div>
+            </div>
+            <button onclick="requestDeposit()" class="primary-btn">Submit for Approval</button>
+        </div>
+    </div>
+
+    <div id="withdraw-view" class="view-container hidden">
+        <button onclick="showDashboard()" class="back-btn">← Back</button>
+        <div class="card">
+            <h3>Withdrawal</h3>
+            <p class="subtitle">Funds will be pending until Admin approval.</p>
+            <div class="input-group">
+                <label>Amount (₦)</label>
+                <input type="number" id="withdraw-amount" class="site-input" placeholder="0.00">
+                <label>Security PIN</label>
+                <input type="password" id="withdraw-pin" class="site-input" maxlength="4" placeholder="****" inputmode="numeric">
+            </div>
+            <button onclick="handleWithdrawal()" class="confirm-withdraw-btn">Confirm Withdrawal</button>
+        </div>
+    </div>
+
     <div id="admin-view" class="view-container hidden admin-theme">
-        <div class="header-row">
-            <h3>Admin Master Vault</h3>
-            <button onclick="showDashboard()" class="back-btn">Exit</button>
-        </div>
-        <div class="admin-stats">
-            <span class="label">Total Vault Liability</span>
-            <h2 id="vault-total">₦0.00</h2>
-        </div>
+        <div class="header-row"><h3>Admin Master Vault</h3><button onclick="showDashboard()" class="back-btn">Exit</button></div>
+        <div class="admin-stats"><span class="label">Total Vault Liability</span><h2 id="vault-total">₦0.00</h2></div>
+        
         <h4>Pending Deposits</h4>
-        <div id="pending-requests-list"></div>
+        <div id="pending-requests-list" class="admin-list-container"></div>
+        
+        <h4 style="margin-top:20px;">Pending Withdrawals</h4>
+        <div id="pending-withdrawals-list" class="admin-list-container"></div>
     </div>
 
     <nav class="bottom-nav hidden" id="main-nav">
@@ -360,7 +342,11 @@
         </div>
         <div class="nav-tab" id="nav-calc" onclick="switchTab('calc', this)">
             <svg class="nav-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line>
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                <line x1="8" y1="6" x2="16" y2="6"></line>
+                <line x1="16" y1="14" x2="16" y2="18"></line>
+                <path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path>
+                <path d="M12 14h.01"></path><path d="M8 14h.01"></path>
             </svg>
             <span class="nav-label">Calculator</span>
         </div>
